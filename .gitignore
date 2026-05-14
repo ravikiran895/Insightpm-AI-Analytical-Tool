@@ -1,0 +1,128 @@
+# =============================================================================
+# .gitignore for InsightPM
+#
+# Keeps secrets, build artifacts, and machine-specific data out of the repo.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Secrets — never commit these
+# -----------------------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+service-account*.json
+gcp-credentials*.json
+credentials.json
+secrets/
+
+# -----------------------------------------------------------------------------
+# Python
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+wheels/
+develop-eggs/
+.installed.cfg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+virtualenv/
+venv.bak/
+
+# Testing & coverage
+.pytest_cache/
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.cover
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+
+# -----------------------------------------------------------------------------
+# Node / Frontend
+# -----------------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm
+.yarn-integrity
+
+# Build output
+frontend/dist/
+frontend/build/
+.parcel-cache/
+
+# -----------------------------------------------------------------------------
+# InsightPM-specific runtime data
+# -----------------------------------------------------------------------------
+# SQLite database with saved profiles, funnels, cohorts (machine-local)
+~/.insightpm/
+.insightpm/
+
+# Local logs
+logs/
+*.log
+
+# Backup files
+*.bak
+*.backup
+backups/
+
+# -----------------------------------------------------------------------------
+# Editor / IDE
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -----------------------------------------------------------------------------
+# OS junk
+# -----------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# -----------------------------------------------------------------------------
+# Docker
+# -----------------------------------------------------------------------------
+# (Don't ignore Dockerfile or docker-compose.yml — those should be committed)
+.docker/
+
+# -----------------------------------------------------------------------------
+# Misc
+# -----------------------------------------------------------------------------
+*.zip
+*.tar.gz
+.cache/
+tmp/
+temp/

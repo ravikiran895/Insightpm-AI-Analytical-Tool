@@ -1,0 +1,40 @@
+# InsightPM via Docker Compose.
+#
+# Replaces the manual Python/Node setup with one command:
+#   docker compose up
+#
+# The first build takes 2-3 minutes. After that, restarts are instant.
+#
+# Configuration:
+# - Copy backend/.env.example to backend/.env and fill in your values BEFORE
+#   running. This is read by the backend container at startup.
+# - Persistent data (SQLite DB, logs) lives in the named volume `insightpm-data`.
+#   Survives container restarts and `docker compose down`.
+#   To wipe everything: `docker compose down -v`.
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
+    volumes:
+      - insightpm-data:/data
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  insightpm-data:
+    name: insightpm-data

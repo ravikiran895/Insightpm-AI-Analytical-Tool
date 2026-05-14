@@ -1,0 +1,574 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fafafa;
+  color: #1a1a1a;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.header h1 { margin: 0; font-size: 22px; font-weight: 600; }
+.conn { font-size: 13px; color: #555; }
+
+.card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.card h2 { margin: 0 0 16px 0; font-size: 16px; font-weight: 600; }
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.kpi {
+  background: #f6f7f9;
+  border-radius: 8px;
+  padding: 14px;
+}
+.kpi .label { font-size: 12px; color: #666; }
+.kpi .value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+
+.insight {
+  padding: 12px 14px;
+  border-left: 4px solid #4f7cff;
+  margin-bottom: 10px;
+  background: #f7f9ff;
+  border-radius: 0 6px 6px 0;
+}
+.insight.high { border-left-color: #d94f4f; background: #fff5f5; }
+.insight.med  { border-left-color: #e6a23c; background: #fffaf0; }
+.insight .title { font-weight: 600; font-size: 14px; }
+.insight .detail { font-size: 13px; color: #555; margin-top: 4px; }
+
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+input, textarea, select, button {
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  background: #fff;
+  font-family: inherit;
+}
+input:focus, textarea:focus { outline: 2px solid #4f7cff33; border-color: #4f7cff; }
+
+button {
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+button.secondary { background: #fff; color: #1a1a1a; border: 1px solid #d0d0d0; }
+
+.funnel-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+.funnel-bar .name { width: 220px; font-size: 13px; }
+.funnel-bar .bar  { flex: 1; height: 22px; background: #eef0f5; border-radius: 4px; overflow: hidden; }
+.funnel-bar .bar-fill { height: 100%; background: #4f7cff; transition: width 0.3s ease; }
+.funnel-bar .stat { width: 180px; text-align: right; font-size: 12px; color: #555; }
+
+.error {
+  background: #fff5f5;
+  color: #b00;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  border: 1px solid #f5c2c2;
+}
+
+.muted { color: #888; font-size: 13px; }
+
+.nlq-box { display: flex; gap: 8px; }
+.nlq-box input { flex: 1; }
+.nlq-answer {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: #f6f7f9;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
+th { font-weight: 600; color: #555; }
+tbody tr:hover { background: #fafbfc; }
+
+.steps-display {
+  font-size: 12px;
+  color: #666;
+  margin: 8px 0 12px 0;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Skeleton loaders — better than "Loading..." text. */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton-line {
+  height: 14px;
+  margin: 8px 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #f0f0f0 0px, #f8f8f8 200px, #f0f0f0 400px);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+.skeleton-block {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #f0f0f0 0px, #f8f8f8 200px, #f0f0f0 400px);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+/* Empty state — friendly placeholder when there's no data. */
+.empty-state {
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Step chips — funnel step list with remove buttons. */
+.step-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 16px;
+}
+.step-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f4fa;
+  border: 1px solid #d8e1f0;
+  border-radius: 14px;
+  padding: 4px 10px 4px 4px;
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+}
+.step-chip-num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #4f7cff;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: -apple-system, sans-serif;
+}
+.step-chip-close {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 2px;
+  cursor: pointer;
+  color: #888;
+  font-size: 14px;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.step-chip-close:hover { color: #d94f4f; }
+
+/* Funnel visualization — replaces the old simple bars with a more readable layout. */
+.funnel-viz {
+  margin-top: 8px;
+}
+.funnel-row {
+  display: grid;
+  grid-template-columns: 28px 220px 1fr 130px;
+  gap: 10px;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #f4f4f4;
+}
+.funnel-row:last-child { border-bottom: none; }
+.funnel-step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #4f7cff;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+.funnel-step-name {
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.funnel-step-bar {
+  height: 28px;
+  background: #eef0f5;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.funnel-step-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4f7cff 0%, #6890ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  transition: width 0.4s ease;
+  min-width: 32px;
+}
+.funnel-step-pct {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+.funnel-step-stats {
+  text-align: right;
+}
+
+/* Severity badge for insights */
+.severity-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 8px;
+  min-width: 28px;
+  text-align: center;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Event table polish */
+.event-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #888;
+  font-weight: 600;
+}
+.event-table td {
+  vertical-align: middle;
+}
+
+/* Cohort builder */
+.cohort-builder { width: 100%; }
+.cohort-chip {
+  display: inline-flex;
+  align-items: center;
+  background: #fff5e0;
+  border: 1px solid #f5dca0;
+  color: #92681a;
+  border-radius: 12px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+}
+.cohort-filter-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+.cohort-applied-pill {
+  background: #fff5e0;
+  border: 1px solid #f5dca0;
+  color: #92681a;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+/* AI badge for NLQ */
+.ai-badge {
+  background: linear-gradient(90deg, #4f7cff, #8a5cf0);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 8px;
+  letter-spacing: 0.02em;
+}
+
+/* Breakdown table — used by both funnel and retention breakdowns */
+.breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 8px;
+}
+.breakdown-table th,
+.breakdown-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+  vertical-align: middle;
+}
+.breakdown-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #888;
+  font-weight: 600;
+}
+.breakdown-table tr:hover td { background: #fafbfc; }
+
+/* LLM-powered insight explanation box */
+.explanation-box {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #f8f6ff;
+  border: 1px solid #e0d9f5;
+  border-left: 3px solid #8a5cf0;
+  border-radius: 0 6px 6px 0;
+}
+.explanation-source-tag {
+  background: linear-gradient(90deg, #4f7cff, #8a5cf0);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 8px;
+  letter-spacing: 0.02em;
+}
+
+/* User Profiler styles (the USP feature) */
+.usp-badge {
+  background: linear-gradient(90deg, #ff7a00, #ff3d75);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+/* Saved cohorts/funnels picker dropdown */
+.saved-picker {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+  min-width: 280px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  z-index: 50;
+  max-height: 300px;
+  overflow: auto;
+}
+.saved-row {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.saved-row:hover { background: #fafbfc; }
+.saved-row:last-child { border-bottom: none; }
+
+/* Where/When/Why investigation view */
+.investigation-box {
+  margin-top: 10px;
+  padding: 14px;
+  background: #fafbff;
+  border: 1px solid #d8e3ff;
+  border-radius: 8px;
+}
+.invest-section { margin-bottom: 14px; }
+.invest-section:last-child { margin-bottom: 0; }
+.invest-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #555;
+  margin-bottom: 8px;
+}
+.invest-axes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 768px) {
+  .invest-axes { grid-template-columns: 1fr; }
+}
+.invest-axis {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+.invest-axis-label {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.invest-axis-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 12px;
+}
+.invest-axis-row > span:first-child {
+  min-width: 70px;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+}
+.invest-top-bold { font-weight: 600; color: #4f7cff; }
+.invest-axis-bar {
+  height: 6px;
+  background: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.invest-axis-pct {
+  font-size: 11px;
+  color: #666;
+  min-width: 80px;
+  text-align: right;
+}
+.invest-why-what {
+  background: #fff;
+  border: 1px solid #eee;
+  border-left: 3px solid #8a5cf0;
+  border-radius: 0 6px 6px 0;
+  padding: 10px 12px;
+  color: #333;
+}
+.recent-users-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+  min-width: 320px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  z-index: 10;
+}
+.recent-user-row {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.1s;
+}
+.recent-user-row:hover { background: #fafbfc; }
+.recent-user-row:last-child { border-bottom: none; }
+.recent-user-id {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 12px;
+  color: #1a1a1a;
+}
+.profile-metrics {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.profile-metric {
+  background: #fafbfc;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
+}
+@media (max-width: 768px) {
+  .profile-metrics { grid-template-columns: repeat(3, 1fr); }
+}
+.pattern-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+.narrative-box {
+  background: #f8f6ff;
+  border: 1px solid #e0d9f5;
+  border-left: 3px solid #8a5cf0;
+  border-radius: 0 6px 6px 0;
+  padding: 12px 14px;
+  margin-top: 4px;
+}
+.narrative-content { color: #333; }
+.event-chip {
+  display: inline-flex;
+  align-items: center;
+  background: #f1f4fa;
+  border: 1px solid #d8e1f0;
+  border-radius: 12px;
+  padding: 3px 10px;
+  font-size: 12px;
+}
+.journey-list {
+  margin-top: 8px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  max-height: 320px;
+  overflow: auto;
+}
+.journey-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 1fr;
+  gap: 10px;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-bottom: 1px solid #f4f4f4;
+}
+.journey-row:last-child { border-bottom: none; }
+.journey-time {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  color: #666;
+  font-size: 11px;
+}
+.journey-event {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-weight: 500;
+}
+.journey-context {
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
