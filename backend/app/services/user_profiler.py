@@ -439,7 +439,12 @@ def find_recent_users(start_date: str, end_date: str, limit: int = 20) -> list[d
     interface.
 
     Strategy: pull users by event count desc (most active first) so the
-    examples are interesting."""
+    examples are interesting.
+
+    NOTE: Some Firebase Analytics exports contain rows with NULL user_pseudo_id
+    (e.g. server-side events, crash reports without a user context). We filter
+    these out so the frontend never receives a null ID — see UserProfiler.jsx
+    crash on Octopus Invasion data."""
     cfg = get_active_config()
     sql = f"""
     SELECT
@@ -450,18 +455,33 @@ def find_recent_users(start_date: str, end_date: str, limit: int = 20) -> list[d
       COUNT(DISTINCT DATE(TIMESTAMP_MICROS(event_timestamp))) AS active_days
     FROM {cfg.events_table}
     WHERE _TABLE_SUFFIX BETWEEN @start_date AND @end_date
+      AND user_pseudo_id IS NOT NULL
     GROUP BY user_pseudo_id
     ORDER BY event_count DESC
     LIMIT @limit
     """
     rows = run_query(sql, {"start_date": start_date, "end_date": end_date, "limit": limit})
+
+    def _iso(v):
+        # BigQuery driver returns either datetime objects or pre-formatted
+        # strings depending on type; handle both.
+        if v is None:
+            return None
+        if hasattr(v, "isoformat"):
+            return v.isoformat()
+        return str(v)
+
     out = []
     for r in rows:
+        # Belt-and-suspenders: also skip nulls at the Python layer in case
+        # the SQL filter is bypassed (e.g. cached results from before this fix).
+        if not r.get("user_pseudo_id"):
+            continue
         out.append({
             "user_id": r["user_pseudo_id"],
             "event_count": r["event_count"],
-            "first_seen": r["first_seen"].isoformat() if r.get("first_seen") else None,
-            "last_seen": r["last_seen"].isoformat() if r.get("last_seen") else None,
+            "first_seen": _iso(r.get("first_seen")),
+            "last_seen": _iso(r.get("last_seen")),
             "active_days": r["active_days"],
         })
     return out

@@ -106,17 +106,17 @@ export default function UserProfiler({ dateRange }) {
               {recentUsers && recentUsers.length > 0 && (
                 <div style={{ maxHeight: 320, overflow: 'auto' }}>
                   <div className="muted" style={{ padding: '8px 12px', fontSize: 11, borderBottom: '1px solid #eee' }}>
-                    Top {recentUsers.length} users by event count
+                    Top {recentUsers.filter((u) => u && u.user_id).length} users by event count
                   </div>
-                  {recentUsers.map((u) => (
+                  {recentUsers.filter((u) => u && u.user_id).map((u) => (
                     <div
                       key={u.user_id}
                       onClick={() => { setUserIdInput(u.user_id); profileFor(u.user_id); }}
                       className="recent-user-row"
                     >
-                      <div className="recent-user-id">{u.user_id.slice(0, 24)}…</div>
+                      <div className="recent-user-id">{String(u.user_id).slice(0, 24)}…</div>
                       <div className="muted" style={{ fontSize: 11 }}>
-                        {u.event_count} events · {u.active_days} active days
+                        {u.event_count ?? 0} events · {u.active_days ?? 0} active days
                       </div>
                     </div>
                   ))}
