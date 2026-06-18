@@ -60,7 +60,7 @@ body {
 }
 
 .app {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 24px;
 }
@@ -69,7 +69,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 .header h1 {
   margin: 0;
@@ -731,4 +731,998 @@ tbody tr:hover { background: var(--bg); }
   text-overflow: ellipsis;
   white-space: nowrap;
   color: var(--text-2);
+}
+
+/* ============================================================
+   User Profile dossier — Step 2 of incremental polish
+   Additive only. Existing UserProfiler classes preserved above.
+   ============================================================ */
+
+.dossier { margin-top: 4px; }
+
+.dossier-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, var(--blue-soft) 0%, var(--surface) 70%);
+  border: 0.5px solid var(--blue-border);
+  border-radius: 12px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dossier-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 16px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.dossier-hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.dossier-uid {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-2);
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dossier-headline {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 3px;
+  letter-spacing: -0.02em;
+}
+
+.dossier-sub {
+  font-size: 12px;
+  color: var(--text-2);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.dossier-source-badge {
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.dossier-metrics {
+  margin-bottom: 14px;
+}
+
+.dossier-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  text-transform: uppercase;
+}
+
+/* Structured narrative cards */
+.narrative-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.narrative-card {
+  background: var(--blue-soft);
+  border: 0.5px solid var(--blue-border);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.narrative-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.narrative-card-body {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.narrative-card-body strong {
+  font-weight: 600;
+  background: linear-gradient(transparent 60%, rgba(239, 159, 39, 0.25) 60%);
+  padding: 0 2px;
+}
+
+/* Recommendations list */
+.rec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rec-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border-radius: 7px;
+  border: 0.5px solid var(--border);
+  transition: all 0.15s ease;
+}
+
+.rec-item:hover {
+  border-color: var(--blue-border);
+  transform: translateX(2px);
+}
+
+.rec-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+}
+
+.rec-text {
+  font-size: 12.5px;
+  color: var(--text);
+  line-height: 1.55;
+  flex: 1;
+}
+
+/* Focus card and bars */
+.focus-card {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+}
+
+.focus-card .dossier-section-label {
+  margin-bottom: 10px;
+}
+
+.focus-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.focus-bar-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 44px;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.focus-bar-label {
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+.focus-bar-track {
+  height: 6px;
+  background: var(--bg-subtle);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.focus-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue) 0%, var(--navy) 100%);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.focus-bar-pct {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+/* ============================================================
+   Investigator polish — Step 3 of incremental polish
+   Additive only. Original .invest-* classes preserved above.
+   New classes use "-v2" suffix or distinct names to avoid collision.
+   ============================================================ */
+
+/* Investigate button — replaces inline gradient style */
+.btn-investigate {
+  font-size: 11px;
+  padding: 4px 10px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-investigate:hover {
+  box-shadow: 0 2px 8px rgba(24, 95, 165, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Investigate loading state */
+.investigate-loading {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+  padding: 12px 14px;
+  background: var(--blue-soft);
+  border: 0.5px solid var(--blue-border);
+  border-radius: 8px;
+  color: var(--navy);
+}
+.investigate-spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--blue-border);
+  border-top-color: var(--blue);
+  animation: invest-spin 0.9s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes invest-spin { to { transform: rotate(360deg); } }
+
+/* Investigation result wrapper — replaces .investigation-box for new view */
+.investigation-box-v2 {
+  margin-top: 10px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+}
+
+/* Hero strip */
+.invest-hero {
+  background: linear-gradient(135deg, var(--blue-soft) 0%, var(--surface) 60%);
+  border: 0.5px solid var(--blue-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.invest-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.invest-hero-severity {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+}
+.invest-hero-kind {
+  font-size: 11px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+.invest-hero-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  margin-top: 4px;
+}
+.invest-hero-sub {
+  font-size: 12px;
+  color: var(--text-2);
+  margin-top: 4px;
+}
+
+/* Where / When grid */
+.invest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+@media (max-width: 900px) {
+  .invest-grid { grid-template-columns: 1fr; }
+}
+
+.invest-panel {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.invest-panel-head {
+  padding: 10px 14px;
+  border-bottom: 0.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.invest-panel-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.invest-panel-sub {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: 500;
+}
+.invest-panel-body {
+  padding: 12px 14px;
+}
+
+/* Where axis (heatmap style) */
+.where-axis-v2 {
+  margin-bottom: 12px;
+}
+.where-axis-v2:last-child { margin-bottom: 0; }
+
+.where-axis-label-v2 {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+.where-row-v2 {
+  display: grid;
+  grid-template-columns: 90px 1fr 44px;
+  gap: 8px;
+  align-items: center;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: background 0.15s ease;
+}
+.where-row-v2:hover { background: var(--blue-soft); }
+
+.where-name-v2 {
+  color: var(--text-2);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.where-row-v2.top .where-name-v2 {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.where-bar-v2 {
+  display: block;
+  height: 5px;
+  background: var(--bg-subtle);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.where-fill-v2 {
+  display: block;
+  height: 100%;
+  background: var(--text-3);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+.where-row-v2.top .where-fill-v2 {
+  background: linear-gradient(90deg, var(--blue) 0%, var(--navy) 100%);
+}
+
+.where-val-v2 {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-2);
+  font-weight: 500;
+}
+.where-row-v2.top .where-val-v2 { color: var(--navy); font-weight: 600; }
+
+/* When chart caption */
+.invest-when-caption {
+  font-size: 12px;
+  color: var(--text-2);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* Why & What card */
+.why-what-card {
+  background: linear-gradient(180deg, var(--blue-soft) 0%, var(--surface) 100%);
+  border: 0.5px solid var(--blue-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.why-what-head {
+  padding: 10px 14px;
+  border-bottom: 0.5px solid var(--blue-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.why-what-body {
+  padding: 14px;
+}
+.why-what-section {
+  margin-bottom: 14px;
+}
+.why-what-section:last-child { margin-bottom: 0; }
+
+.why-what-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.why-what-text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+}
+.why-what-text strong {
+  font-weight: 600;
+  background: linear-gradient(transparent 60%, rgba(239, 159, 39, 0.25) 60%);
+  padding: 0 2px;
+}
+
+/* Action list */
+.invest-action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.invest-action-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border-radius: 7px;
+  border: 0.5px solid var(--border);
+  transition: all 0.15s ease;
+}
+.invest-action-item:hover {
+  border-color: var(--blue-border);
+  transform: translateX(2px);
+}
+.invest-action-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+}
+.invest-action-text {
+  font-size: 12.5px;
+  color: var(--text);
+  line-height: 1.55;
+  flex: 1;
+}
+.invest-action-text strong {
+  font-weight: 600;
+  background: linear-gradient(transparent 60%, rgba(239, 159, 39, 0.25) 60%);
+  padding: 0 2px;
+}
+
+/* ============================================================
+   LoadingOverlay — Step 4 of incremental polish
+   Full-screen modal with animated logo + sequenced step reveals.
+   Additive only. No existing classes modified.
+   ============================================================ */
+
+.ipm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 24, 40, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+  animation: ipm-overlay-fade 0.18s ease-out;
+  /* Prevent flicker by isolating compositing layer */
+  will-change: opacity;
+}
+@keyframes ipm-overlay-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ipm-overlay-card {
+  position: relative;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  padding: 32px 28px 24px;
+  width: 100%;
+  max-width: 460px;
+  text-align: center;
+  box-shadow: 0 24px 48px -12px rgba(16, 24, 40, 0.22), 0 8px 16px -4px rgba(16, 24, 40, 0.1);
+  animation: ipm-overlay-card-in 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes ipm-overlay-card-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Cancel X button — top-right corner of the loading card */
+.ipm-overlay-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: transparent;
+  border: 0.5px solid transparent;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+.ipm-overlay-close:hover {
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--danger-text);
+}
+.ipm-overlay-close:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.15);
+}
+
+.ipm-overlay-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  box-shadow: 0 8px 24px rgba(12, 68, 124, 0.25);
+  animation: ipm-overlay-logo-breath 2.2s ease-in-out infinite;
+}
+@keyframes ipm-overlay-logo-breath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+.ipm-overlay-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.ipm-overlay-desc {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.55;
+  margin-bottom: 20px;
+}
+
+.ipm-overlay-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+  text-align: left;
+}
+
+.ipm-overlay-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  background: var(--bg);
+  border: 0.5px solid var(--border);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.4s ease;
+}
+
+.ipm-overlay-step.ipm-step-pending {
+  opacity: 0;
+}
+.ipm-overlay-step.ipm-step-active,
+.ipm-overlay-step.ipm-step-done {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ipm-overlay-step.ipm-step-active {
+  background: var(--blue-soft);
+  border-color: var(--blue-border);
+  color: var(--navy);
+}
+
+.ipm-overlay-step.ipm-step-done {
+  background: var(--positive-soft);
+  border-color: var(--positive-border);
+  color: var(--positive-text);
+}
+
+.ipm-step-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.ipm-step-name {
+  flex: 1;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.ipm-step-time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.ipm-step-spinner {
+  animation: ipm-overlay-spin 1s linear infinite;
+  transform-origin: center;
+}
+@keyframes ipm-overlay-spin {
+  to { transform: rotate(360deg); }
+}
+
+.ipm-step-dot {
+  animation: ipm-overlay-pulse 1.4s ease-in-out infinite;
+  color: var(--text-3);
+}
+@keyframes ipm-overlay-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.ipm-overlay-timer {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ipm-overlay-dismiss {
+  margin-top: 14px;
+  background: transparent;
+  border: none;
+  color: var(--text-3);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+.ipm-overlay-dismiss:hover {
+  color: var(--text-2);
+  background: var(--bg);
+}
+
+/* ============================================================
+   Tab navigation — Step 5: full layout restructure into pages
+   Sits between the header and the page content.
+   ============================================================ */
+
+.tab-nav {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 16px;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-btn {
+  padding: 8px 14px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(24, 95, 165, 0.2);
+}
+
+.tab-btn.active:hover {
+  /* Keep the active gradient on hover — don't fade to soft blue */
+  background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .tab-nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-btn {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+}
+
+/* ============================================================
+   Dashboard Overview — Session A: real KPI tiles with backend data
+   New classes are -v2 suffixed where they parallel old polished
+   classes (kpi, top-events) to avoid collision with Step 1's CSS.
+   ============================================================ */
+
+.dash-overview {
+  margin-bottom: 16px;
+}
+
+.dash-overview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 0 4px;
+}
+
+.dash-overview-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.dash-compare-toggle {
+  background: transparent;
+  border: 0.5px solid var(--border);
+  color: var(--text-2);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+.dash-compare-toggle:hover {
+  background: var(--bg);
+  border-color: var(--border-strong);
+}
+.dash-compare-toggle.on {
+  background: var(--blue-soft);
+  border-color: var(--blue-border);
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.kpi-grid-v2 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+@media (max-width: 900px) {
+  .kpi-grid-v2 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+  .kpi-grid-v2 { grid-template-columns: 1fr; }
+}
+
+.kpi-v2 {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  transition: all 0.15s ease;
+}
+.kpi-v2:hover {
+  border-color: var(--blue-border);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.kpi-v2-label {
+  font-size: 11px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.kpi-v2-value {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--text);
+  margin-top: 6px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  /* Stabilize digit widths so deltas re-rendering don't shift the value */
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-v2-delta {
+  font-size: 12px;
+  margin-top: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.kpi-v2-delta.delta-up { color: var(--positive-text); }
+.kpi-v2-delta.delta-down { color: var(--danger-text); }
+.kpi-v2-delta.delta-flat { color: var(--text-3); }
+
+.delta-arrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.kpi-v2-delta-spacer {
+  height: 20px;
+  margin-top: 8px;
+}
+
+.kpi-v2-subtext {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 6px;
+  line-height: 1.4;
+  font-family: var(--font-mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kpi-v2-spark {
+  margin-top: 8px;
+}
+
+/* Top Events card (overview's version) */
+.dash-top-events {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.dash-top-events-head {
+  padding: 12px 16px;
+  border-bottom: 0.5px solid var(--border);
+}
+.card-title-v2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.dash-top-events-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ============================================================
+   Sticky top region — Session A.1: header + tabs + date stay pinned
+   Wraps header, tab-nav, and the date range card. The whole block
+   sticks to the top of the viewport when scrolling. The background
+   matches the page bg so content scrolling underneath is hidden
+   behind it, not visible through transparency.
+   ============================================================ */
+
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  /* Pull sticky to align with viewport edge despite .app padding */
+  margin: -24px -24px 16px -24px;
+  padding: 24px 24px 0 24px;
+  /* Soft shadow appears when scrolled (browser doesn't have :stuck yet,
+     so we always show a faint border-bottom hint) */
+  border-bottom: 0.5px solid var(--border);
+}
+
+/* The date range card sits inside sticky-top; remove its bottom margin
+   so it hugs the sticky bottom border cleanly. */
+.sticky-date-card {
+  margin-bottom: 0 !important;
+}
+
+/* The tab nav inside sticky-top doesn't need extra bottom margin either */
+.sticky-top .tab-nav {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 700px) {
+  .sticky-top {
+    margin: -16px -16px 12px -16px;
+    padding: 16px 16px 0 16px;
+  }
 }

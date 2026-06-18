@@ -100,6 +100,10 @@ export const api = {
   nlq: (question) =>
     req('/nlq', { method: 'POST', body: JSON.stringify({ question }) }),
 
+  // Dashboard KPIs (overview headline tiles + top events + sparkline)
+  dashboardKpis: (body) =>
+    req('/dashboard/kpis', { method: 'POST', body: JSON.stringify(body) }),
+
   // System
   freshness: () => req('/freshness'),
   cacheStats: () => req('/cache/stats'),

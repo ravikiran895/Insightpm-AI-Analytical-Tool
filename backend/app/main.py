@@ -17,6 +17,7 @@ from .routers import (
     auth as auth_router,
     breakdown,
     connection,
+    dashboard,
     events,
     funnel,
     insights,
@@ -109,6 +110,7 @@ app.include_router(saved_funnels.router, prefix=API, tags=["saved_funnels"])
 app.include_router(saved_cohorts.router, prefix=API, tags=["saved_cohorts"])
 app.include_router(breakdown.router, prefix=API, tags=["breakdown"])
 app.include_router(user_profile.router, prefix=API, tags=["user_profile"])
+app.include_router(dashboard.router, prefix=API, tags=["dashboard"])
 
 
 @app.get("/health")
