@@ -1,4 +1,5 @@
 # InsightPM
+![Uploading LOGO.png…]()
 
 Self-hosted product analytics on top of your Firebase / GA4 BigQuery export.
 Funnels, retention, cohorts, breakdowns, AI-generated user behavior narratives.
